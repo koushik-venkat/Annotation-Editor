@@ -14,7 +14,6 @@ type HandleSideButtonClick = (payload: string) => void;
 
 const Button = ({ onClickString, buttonTitle }: ButtonPropsType) => {
   const { handleSideBarButtonClick } = useSideBarButtonClick();
-  const currentMode = useSelector((state: RootState) => state.drawing.mode);
   const urlImage = useSelector((state: RootState) => state.loadImage.imageURL);
   const currentThemeDark = useSelector((state: RootState) => state.darkMode.darkMode);
 
@@ -25,17 +24,14 @@ const Button = ({ onClickString, buttonTitle }: ButtonPropsType) => {
   return (
     <div>
       <button
-        disabled={
-          onClickString === 'save'
-            ? urlImage === null || currentMode === null
-            : urlImage === null
-        }
+        disabled={urlImage === null}
         type="button"
+        
         className={clsx(
-          '  focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-3.5  mb-2   w-17 flex justify-center items-center h-10 disabled:opacity-25  disabled:cursor-not-allowed',
-          onClickString !== 'save'
+          'focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-3.5  mb-2   w-17 flex justify-center items-center h-10 disabled:opacity-25  disabled:cursor-not-allowed',
+          (onClickString !== 'download' && onClickString !== 'saveCanvas')
             ? 'w-36 mr-2 m-4'
-            : 'w-full rounded-md  mt-3 ',
+            : 'w-40 rounded-md  mt-5 ',
           currentThemeDark
             ? 'text-[#FFFFFF] border   hover:bg-gray-700 dark:focus:ring-gray-600 dark:border-white'
             : 'text-black border border-black  hover:bg-gray-200'
@@ -45,6 +41,7 @@ const Button = ({ onClickString, buttonTitle }: ButtonPropsType) => {
         <ButtonIcon title={onClickString} />
         {buttonTitle}
       </button>
+      
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { loadImageURL } from '../../redux-state/features/loadImage/loadImageSlic
 import { RootState } from '../../redux-state/store';
 import clsx from 'clsx';
 import useHandleFileChange from '../../hooks/useHandleFileChange';
+import { changeBrightness, changeContrast, emptyAnnotations, emptyHistoryStack } from '../../redux-state/features/drawing/drawingSlice';
 
 type HandleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -19,16 +20,20 @@ const Footer = () => {
   };
 
   const handleRemove = () => {
+    dispatch(changeBrightness(0));
+    dispatch(changeContrast(0));
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
       dispatch(loadImageURL(null));
+      dispatch(emptyAnnotations());
+      dispatch(emptyHistoryStack());
     }
   };
 
   return (
     <div
       className={clsx(
-        'flex flex-col shadow-[#000000] shadow-lg',
+        'flex flex-col shadow-[#000000] ',
         currentThemeDark
           ? 'bg-[#1B1F23] border-black shadow-slate-600'
           : 'shadow-[#000000] bg-white border-black'

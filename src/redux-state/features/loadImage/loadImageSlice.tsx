@@ -3,10 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface loadImageState {
   imageURL: string | null;
+  fileName: string|null;
 }
 
 const initialState: loadImageState = {
   imageURL: null,
+  fileName: null,
 };
 
 export const loadImageSlice = createSlice({
@@ -16,9 +18,12 @@ export const loadImageSlice = createSlice({
     loadImageURL: (state, action: PayloadAction<string | null>) => {
       state.imageURL = action.payload;
     },
+    loadFileName: (state, action) =>{
+      state.fileName = action.payload;
+    }
   },
 });
 
-export const { loadImageURL } = loadImageSlice.actions;
+export const { loadImageURL, loadFileName } = loadImageSlice.actions;
 
 export default loadImageSlice.reducer;

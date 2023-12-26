@@ -1,23 +1,41 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  changeBrightness,
   changeBrushSize,
+  changeContrast,
   toggleFillShape,
 } from '../../../redux-state/features/drawing/drawingSlice';
 import Button from './Button';
 import { RootState } from '../../../redux-state/store';
 import ColorPicker from './ColorPicker';
 import { clsx } from 'clsx';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import useRestructureCanvas from '../../../hooks/useRestructureCanvas';
+
+
 
 const index = () => {
   const dispatch = useDispatch();
   const currentMode = useSelector((state: RootState) => state.drawing.mode);
   const [brushSize, setBrushSize] = useState<number>(1);
   const currentThemeDark = useSelector((state: RootState) => state.darkMode.darkMode);
+  const imgURL = useSelector((state: RootState) => state.loadImage.imageURL);
+  const brightnessValue = useSelector((state: RootState) => state.drawing.brightness);
+  const contrastValue = useSelector((state: RootState) => state.drawing.contrast);
+  const [brightness] = useState<number>(brightnessValue);
+  const [contrast] = useState<number>(contrastValue);
 
   const handleToggle = () => {
     dispatch(toggleFillShape());
   };
+
+  useRestructureCanvas();
+
+  useEffect(() => {
+    dispatch(changeBrightness(brightness));
+    dispatch(changeContrast(contrast));
+  }, [contrast, brightness]);
 
   useEffect(() => {
     dispatch(changeBrushSize(brushSize));
@@ -85,7 +103,7 @@ const index = () => {
               currentThemeDark ? 'text-white  border-white' : ' border-slate-300'
             )}
           >
-            Brush Properties
+            Brush Tools
           </p>
           <div className='flex items-center'>
             <label
@@ -154,7 +172,7 @@ const index = () => {
             </p>
             <label
               className={clsx(
-                'relative inline-flex items-center mb-5',
+                'relative inline-flex items-center mb-2',
                 currentMode === null ? 'cursor-not-allowed' : 'cursor-pointer'
               )}
             >
@@ -180,8 +198,97 @@ const index = () => {
             </label>
           </div>
         </div>
-        <div className="justify-center ">
-          <Button onClickString={'save'} buttonTitle={'Save'} />
+
+        <div
+          className={clsx(
+            imgURL !== null
+              ? currentThemeDark
+                ? 'flex  p-5 rounded-md mt-3 justify-around shadow-md flex-col gap-3 border'
+                : 'flex  p-5 rounded-md mt-3 justify-around shadow-md flex-col gap-3 border border-black'
+              : currentThemeDark
+                ? 'flex  p-5 rounded-md mt-3 justify-around shadow-md flex-col  gap-3 border opacity-25'
+                : 'flex  p-5 rounded-md mt-3 justify-around shadow-md flex-col  gap-3 border text-gray-300'
+          )}
+        >
+          <p
+            className={clsx(
+              'font-semibold text-center border-b  pb-2 ',
+              currentThemeDark ? 'text-white  border-white' : ' border-slate-300'
+            )}
+          >
+            Image Tools
+          </p>
+
+          <div className="flex items-center">
+            <label
+              htmlFor="brushSize"
+              className={clsx(
+                'font-medium text-[14px]  mr-3',
+                currentThemeDark ?
+                  imgURL ?
+                    'text-white' :
+                    'text-white'
+                  : imgURL ?
+                    'text-black' :
+                    'text-gray-300'
+              )}
+            >
+              Brightness:
+            </label>
+            <input
+              disabled={imgURL === null}
+              type='range'
+              className={clsx(
+                ' w-24 ml-1 mt-1',
+                currentThemeDark ? 'accent-slate-200' : 'accent-gray-800'
+              )}
+              min={-1}
+              max={1}
+              value={brightnessValue}
+              step={0.01}
+              onChange={(e) => dispatch(changeBrightness(Number(e.target.value)))}
+            />
+
+            <button disabled={imgURL === null} className={clsx(' ml-6 border border-black p-1.5 px-6 rounded-lg text-sm font-semibold', currentThemeDark ? 'border-white text-white hover:bg-slate-700 disabled:opacity-25  disabled:cursor-not-allowed:' : ' text-slate-800 hover:bg-gray-300 disabled:opacity-25  disabled:cursor-not-allowed')} onClick={() => { dispatch(changeBrightness(0)); }}><RestartAltIcon style={{ width: '24px', paddingRight: '2px', paddingBottom: '2px' }} />Reset</button>
+          </div>
+
+          <div className="flex items-center">
+            <label
+              htmlFor="brushSize "
+              className={clsx(
+                'font-medium text-[14px]  mr-6',
+                currentThemeDark ?
+                  imgURL ?
+                    'text-white' :
+                    'text-white'
+                  : imgURL ?
+                    'text-black' :
+                    'text-gray-300'
+              )}
+            >
+              Contrast:
+            </label>
+            <input
+              disabled={imgURL === null}
+              type='range'
+              className={clsx(
+                ' w-24 ml-1 mt-1',
+                currentThemeDark ? 'accent-slate-200' : 'accent-gray-800'
+              )}
+              min={-1}
+              max={1}
+              value={contrastValue}
+              step={0.01}
+              onChange={(e) => dispatch(changeContrast(Number(e.target.value)))}
+            />
+            <button disabled={imgURL === null} className={clsx(' ml-6 border border-black p-1.5 px-6 rounded-lg text-sm font-semibold', currentThemeDark ? ' text-white hover:bg-slate-600 border-white disabled:opacity-25  disabled:cursor-not-allowed' : ' text-slate-800 hover:bg-gray-300 disabled:opacity-25  disabled:cursor-not-allowed')} onClick={() => { dispatch(changeContrast(0)); }}><RestartAltIcon style={{ width: '24px', paddingRight: '2px', paddingBottom: '2px' }} />Reset</button>
+          </div>
+
+        </div>
+
+        <div className="justify-between flex flex-grow">
+          <Button onClickString={'saveCanvas'} buttonTitle={'Save'} />
+          <Button onClickString={'download'} buttonTitle={'Download'} />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux-state/store';
+import SaveIcon from '@mui/icons-material/Save';
 
 type ButtonIconProps = {
   title: string;
@@ -61,7 +62,7 @@ const ButtonIcon = ({ title }: ButtonIconProps) => {
             fontSize: '28px',
           }}
         />
-      ) : title === 'save' ? (
+      ) : title === 'download' ? (
         <SaveAltTwoToneIcon
           style={{
             fontSize: '28px',
@@ -92,6 +93,12 @@ const ButtonIcon = ({ title }: ButtonIconProps) => {
             paddingBottom: '1px',
           }}
         />
+      ) : title === 'saveCanvas' ? (
+        <SaveIcon style={{
+          fontSize: '24px',
+          paddingRight: '3px',
+          paddingBottom: '1px',
+        }} />
       ) : currentThemeDark ? (
         <img
           width='30'

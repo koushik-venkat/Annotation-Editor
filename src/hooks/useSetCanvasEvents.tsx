@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import setCanvasEvents from '../utils/setCanvasEvents';
+import useSetCanvasEventsFunctions from './useSetCanvasEventsFunctions';
 
 export const useSetCanvasEvents = (dependecies: { currentMode: string | null, currentBrushSize: number, currentColor: string, fillShape: 0 | 1, }, canvas: fabric.Canvas | null) => {
+  const { handleSetCanvasEvents } = useSetCanvasEventsFunctions();
   useEffect(() => {
     if (canvas && dependecies.currentMode)
-      setCanvasEvents(
+      handleSetCanvasEvents(
         canvas,
         dependecies.currentMode,
         dependecies.currentColor,
