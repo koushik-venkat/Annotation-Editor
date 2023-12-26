@@ -18,9 +18,11 @@ const useRestructureCanvas = (
     const widthCanvas = 800;
     dispatch(changeBrightness(brightness));
     dispatch(changeContrast(contrast));
+    
     if (canvas) {
       const center = canvas?.getCenter();
       fabric.Image.fromURL(imgURL!, (img) => {
+
         const finalHeight =
           img.height! *
           Math.min(heightCanvas! / img.width!, widthCanvas! / img.height!);
@@ -32,6 +34,7 @@ const useRestructureCanvas = (
         } else {
           img.scaleToWidth(finalWidth);
         }
+
         const brightnessFilter = new fabric.Image.filters.Brightness({
           brightness: brightness,
         });
@@ -39,6 +42,7 @@ const useRestructureCanvas = (
         const contrastFilter = new fabric.Image.filters.Contrast({
           contrast: contrast,
         });
+
         img.filters = [];
         img.filters.push(brightnessFilter);
         img.filters.push(contrastFilter);
@@ -50,7 +54,9 @@ const useRestructureCanvas = (
           originX: 'center',
           originY: 'center',
         });
+
         canvas.renderAll();
+
       });
     }
   }, [brightness, contrast]);

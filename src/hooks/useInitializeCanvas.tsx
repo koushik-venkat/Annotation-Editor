@@ -18,7 +18,6 @@ const createNewCanvas = (
     width: widthCanvas,
     backgroundColor: bgColor,
     selection: false,
-    defaultCursor: 'crosshair',
   });
 };
 

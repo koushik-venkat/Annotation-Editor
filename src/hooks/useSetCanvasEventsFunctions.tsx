@@ -8,6 +8,7 @@ import useRenderLine from './useRenderLine';
 import useClearCanvas from './useClearCanvas';
 import useRenderFreehand from './useRenderFreehand';
 import useRenderSelectMode from './useRenderSelectMode';
+import useRenderText from './useRenderText';
 
 const useSetCanvasEventsFunctions = () => {
   const { handleRenderingCircle } = useRenderCircle();
@@ -18,6 +19,7 @@ const useSetCanvasEventsFunctions = () => {
   const { clearCanvas } = useClearCanvas();
   const { handleRenderingFreehand } = useRenderFreehand();
   const { handleRenderSelectMode } = useRenderSelectMode();
+  const {handleRenderText} = useRenderText();
 
   const handleSetCanvasEvents = (canvas: fabric.Canvas,
     currentMode: string,
@@ -52,9 +54,14 @@ const useSetCanvasEventsFunctions = () => {
       handleRenderSelectMode(canvas);
     } else if (currentMode === 'line') {
       handleRenderingLine(canvas, currentColor, currentBrushSize, rgbValue);
+    } else if (currentMode === 'text') {
+      handleRenderText(canvas);
+      console.log('text is clicked');
     }
   };
   return { handleSetCanvasEvents };
 };
 
 export default useSetCanvasEventsFunctions;
+
+

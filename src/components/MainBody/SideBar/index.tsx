@@ -80,9 +80,12 @@ const index = () => {
           </div>
           <div className="flex">
             <Button onClickString={'select'} buttonTitle={'Select'} />
-            <Button onClickString={'clear'} buttonTitle={'Clear'} />
+            <Button onClickString={'text'} buttonTitle={'Add Text'} />
           </div>
 
+          <div className='flex'>
+            <Button onClickString={'clear'} buttonTitle={'Clear'} />
+          </div>
           <div></div>
         </div>
 

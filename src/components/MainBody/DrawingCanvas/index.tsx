@@ -52,6 +52,17 @@ const index = () => {
     setShowPopup(true);
   }, [saveToggleState]);
 
+  let xPointer = 0;
+  let yPointer = 0;
+  if (canvas)
+    canvas.on('mouse:down', (o) => {
+      const pointer = canvas.getPointer(o.e);
+      xPointer = pointer.x;
+      yPointer = pointer.y;
+    });
+
+  const [mouseDown, setMouseDown] = useState(false);
+
   return (
     <>
 
@@ -98,7 +109,15 @@ const index = () => {
               </button>
             )}
           </div>
+          {/* {currentMode === 'text' && canvas && mouseDown ?
 
+            // <textarea  
+            //   rows={10} cols={30}
+            //   style={{position:'fixed', top: yPointer, left: xPointer}}
+            // ></textarea>
+            // <h2>Hello Kitty</h2>
+            : ''
+          } */}
           {urlImage ? (
             <>
               <div
@@ -108,7 +127,9 @@ const index = () => {
                 <canvas
                   id="canvas"
                   className='flex flex-1 border border-slate-400'
-                />
+                >
+
+                </canvas>
               </div>
               <div className='flex justify-center mb-3 mr-3'>
                 <button

@@ -29,7 +29,8 @@ const Button = ({ onClickString, buttonTitle }: ButtonPropsType) => {
         
         className={clsx(
           'focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-3.5  mb-2   w-17 flex justify-center items-center h-10 disabled:opacity-25  disabled:cursor-not-allowed',
-          (onClickString !== 'download' && onClickString !== 'saveCanvas')
+          (onClickString === 'clear')? 'w-80 mx-3 ' : '',
+          (onClickString !== 'download' && onClickString !== 'saveCanvas' )
             ? 'w-36 mr-2 m-4'
             : 'w-40 rounded-md  mt-5 ',
           currentThemeDark
@@ -41,7 +42,6 @@ const Button = ({ onClickString, buttonTitle }: ButtonPropsType) => {
         <ButtonIcon title={onClickString} />
         {buttonTitle}
       </button>
-      
     </div>
   );
 };
