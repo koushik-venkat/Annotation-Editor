@@ -11,6 +11,7 @@ import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux-state/store';
 import SaveIcon from '@mui/icons-material/Save';
+import TitleIcon from '@mui/icons-material/Title';
 
 type ButtonIconProps = {
   title: string;
@@ -87,6 +88,15 @@ const ButtonIcon = ({ title }: ButtonIconProps) => {
         />
       ) : title === 'select' ? (
         <AdsClickIcon
+          style={{
+            fontSize: '24px',
+            paddingRight: '3px',
+            paddingBottom: '1px',
+          }}
+        />
+      ) : 
+      title === 'text' ? (
+        <TitleIcon
           style={{
             fontSize: '24px',
             paddingRight: '3px',
