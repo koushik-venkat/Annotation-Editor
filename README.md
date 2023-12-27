@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-#Image annotation using Fabric.Js
-=======
->>>>>>> main
+## Image annotation using Fabric.Js
+
 
