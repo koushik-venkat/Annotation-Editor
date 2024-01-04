@@ -14,7 +14,8 @@ const useSideBarButtonClick = () => {
   const handleSideBarButtonClick = (buttonPressed: string) => {
     if (buttonPressed === 'download') {
       dispatch(saveImage());
-    } else if (buttonPressed === 'saveCanvas' && fileName) {
+    }
+    else if (buttonPressed === 'saveCanvas' && fileName) {
       let tempArray: fabric.Object[] = [];
       if (localStorage.getItem(fileName) && localStorage.getItem(fileName) != null){
         tempArray = tempArray.concat(JSON.parse(localStorage.getItem(fileName)!));

@@ -61,7 +61,7 @@ const index = () => {
       yPointer = pointer.y;
     });
 
-  const [mouseDown, setMouseDown] = useState(false);
+  // const [mouseDown, setMouseDown] = useState(false);
 
   return (
     <>

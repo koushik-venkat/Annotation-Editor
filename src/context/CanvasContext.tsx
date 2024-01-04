@@ -6,3 +6,4 @@ type contextType = {
 };
 
 export const CanvasContext = createContext<contextType | undefined>(undefined);
+

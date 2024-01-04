@@ -94,37 +94,37 @@ const ButtonIcon = ({ title }: ButtonIconProps) => {
             paddingBottom: '1px',
           }}
         />
-      ) : 
-      title === 'text' ? (
-        <TitleIcon
-          style={{
+      ) :
+        title === 'text' ? (
+          <TitleIcon
+            style={{
+              fontSize: '24px',
+              paddingRight: '3px',
+              paddingBottom: '1px',
+            }}
+          />
+        ) : title === 'saveCanvas' ? (
+          <SaveIcon style={{
             fontSize: '24px',
             paddingRight: '3px',
             paddingBottom: '1px',
-          }}
-        />
-      ) : title === 'saveCanvas' ? (
-        <SaveIcon style={{
-          fontSize: '24px',
-          paddingRight: '3px',
-          paddingBottom: '1px',
-        }} />
-      ) : currentThemeDark ? (
-        <img
-          width='30'
-          height='30'
-          className='mr-1 mt-0.8 w-5'
-          src='https://img.icons8.com/ios-filled/50/FFFFFF/ellipse-stroked--v2.png'
-        />
-      ) : (
-        <img
-          width='25'
-          height='25'
-          className='mr-1 mt-0.8 w-5'
-          src='https://img.icons8.com/ios-filled/50/ellipse-stroked--v2.png'
-          alt='ellipse-stroked--v1'
-        />
-      )}
+          }} />
+        ) : currentThemeDark ? (
+          <img
+            width='30'
+            height='30'
+            className='mr-1 mt-0.8 w-5'
+            src='https://img.icons8.com/ios-filled/50/FFFFFF/ellipse-stroked--v2.png'
+          />
+        ) : (
+          <img
+            width='25'
+            height='25'
+            className='mr-1 mt-0.8 w-5'
+            src='https://img.icons8.com/ios-filled/50/ellipse-stroked--v2.png'
+            alt='ellipse-stroked--v1'
+          />
+        )}
     </div>
   );
 };
