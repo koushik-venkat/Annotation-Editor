@@ -6,8 +6,8 @@ import { mode } from '../redux-state/features/drawing/drawingSlice';
 import useInitializeCanvas from './useInitializeCanvas';
 
 export const useUpdateCanvasSize = (EditSectionComponentRef: React.MutableRefObject<HTMLDivElement | null>) => {
-  const [widthCanvas] = useState<number>(800);
-  const [heightCanvas] = useState<number>(450);
+  const [widthCanvas] = useState<number>(1200);
+  const [heightCanvas] = useState<number>(700);
   const { setCanvas } = useCanvasContext();
   const urlImage = useSelector((state: RootState) => state.loadImage.imageURL);
   const currentThemeDark = useSelector((state: RootState) => state.darkMode.darkMode);
